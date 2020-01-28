@@ -1,29 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-    <background>
-        <band/>
-    </background>
-    <title>
-        <band height="79"/>
-    </title>
-    <pageHeader>
-        <band height="35"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="61"/>
-    </columnHeader>
-    <detail>
-        <band height="125"/>
-    </detail>
-    <columnFooter>
-        <band height="45"/>
-    </columnFooter>
-    <pageFooter>
-        <band height="54"/>
-    </pageFooter>
-    <summary>
-        <band height="42"/>
-    </summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+"public"."ObservacionesCalendario".obs_clnd_fecha_ini,
+"public"."ObservacionesCalendario".obs_clnd_fecha_fin,
+"public"."ObservacionesCalendario".obs_clnd_observacion,
+"public"."CalendarioPeriodo".clnd_prd_numero_semana,
+"public"."CalendarioPeriodo".clnd_prd_fecha_ini,
+"public"."CalendarioPeriodo".clnd_prd_fecha_fin,
+"public"."PeriodoLectivo".prd_lectivo_nombre,
+"public"."PeriodoLectivo".id_carrera,
+"public"."CalendarioAcad".fecha_inicio AS "inicio calendario",
+"public"."CalendarioAcad".fecha_fin AS "fin calendario",
+"public"."EventoAcad".titulo,
+"public"."EventoAcad".descripcion,
+"public"."EventoAcad".color
+FROM
+"public"."EventoAcad"
+INNER JOIN "public"."DetalleCalendarioAcad" ON "public"."DetalleCalendarioAcad".evento_id = "public"."EventoAcad"."id"
+INNER JOIN "public"."CalendarioAcad" ON "public"."DetalleCalendarioAcad".calendario_id = "public"."CalendarioAcad"."id"
+INNER JOIN "public"."PeriodoLectivo" ON "public"."CalendarioAcad".periodo_id = "public"."PeriodoLectivo".id_prd_lectivo
+INNER JOIN "public"."CalendarioPeriodo" ON "public"."CalendarioPeriodo".id_prd_lectivo = "public"."PeriodoLectivo".id_prd_lectivo
+INNER JOIN "public"."ObservacionesCalendario" ON "public"."ObservacionesCalendario".id_clnd_prd = "public"."CalendarioPeriodo".id_clnd_prd]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
 </jasperReport>
